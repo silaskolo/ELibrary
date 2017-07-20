@@ -1,139 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="#424242"
-    android:orientation="vertical">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:gravity="center"
-            android:letterSpacing="0.1"
-            android:padding="16dp"
-            android:text="SIGNUP"
-            android:textColor="#ffffff"
-            android:textSize="30sp"
-            android:textStyle="bold"/>
-    </RelativeLayout>
-
-<LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1"
+    android:layout_height="match_parent"
+    android:background="#1f2022"
     android:orientation="vertical">
+
+
+
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="REGISTER"
+            android:layout_gravity="center"
+            android:textColor="#ffffff"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:letterSpacing="0.3"
+            android:textSize="16dp"/>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#ffffff"/>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
             android:layout_weight="0"
             android:orientation="horizontal">
+
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="32dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginRight="8dp"
                 android:layout_weight="1"
+                android:background="#333333"
+                android:hint="First Name"
                 android:padding="16dp"
-                android:text="First Name"/>
+                android:textColor="#ffffff" />
+
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="50dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginRight="32dp"
-                android:layout_marginTop="50dp"
                 android:layout_weight="1"
+                android:background="#333333"
+                android:hint="Last Name"
                 android:padding="16dp"
-                android:text="last Name"/>
+                android:textColor="#ffffff" />
+
         </LinearLayout>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginTop="16dp"
-        android:padding="16dp"
-        android:text="Email"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:orientation="horizontal">
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_weight="1"
-            android:padding="16dp"
-            android:text="Department"/>
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_weight="1"
-            android:padding="16dp"
-            android:text="Level"/>
-    </LinearLayout>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginTop="16dp"
-        android:padding="16dp"
-        android:text="Matric Number"/>
-</LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:orientation="vertical">
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginBottom="0dp"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
+            android:layout_marginTop="16dp"
+            android:background="#333333"
+            android:hint="Email"
             android:padding="16dp"
-            android:text="Password"/>
+            android:textColor="#ffffff" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1"
+                android:background="#333333"
+                android:hint="Department"
+                android:padding="16dp"
+                android:textColor="#ffffff" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="32dp"
+                android:layout_weight="1"
+                android:background="#333333"
+                android:hint="Level"
+                android:padding="16dp"
+                android:textColor="#ffffff" />
+        </LinearLayout>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="#333333"
+            android:hint="Matric Number"
+            android:padding="16dp"
+            android:textColor="#ffffff" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="16dp"
+            android:background="#333333"
+            android:inputType="textPassword"
+            android:hint="Password"
+            android:padding="16dp"
+            android:textColor="#ffffff" />
+
         <Button
-            android:layout_width="150dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="0dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="#000000"
-            android:letterSpacing="0.3"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/green_button"
+            android:letterSpacing="0.2"
             android:text="SIGNUP"
             android:textColor="#ffffff"/>
 
-
-
     </LinearLayout>
-
-
-
-
-
-
-
-
 
 
 </LinearLayout>

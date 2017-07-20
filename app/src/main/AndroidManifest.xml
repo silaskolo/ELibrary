@@ -18,7 +18,12 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".SignupActivity" />
-        <activity android:name=".ForgotActivity"></activity>
+        <activity android:name=".ForgotActivity" />
+        <activity android:name=".DashboardActivity" >
+        </activity>
+        <activity android:name=".BrowseActivity" />
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".LibraryActivity"></activity>
     </application>
 
 </manifest>

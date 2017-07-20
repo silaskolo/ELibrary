@@ -43,6 +43,7 @@
             android:letterSpacing="0.3"
             android:text="LOGIN"
             android:textColor="#ffffff"
+            android:onClick="onClickOpenLoginActivity"
             />
         <Button
             android:layout_width="0dp"
@@ -55,7 +56,9 @@
             android:background="@drawable/button_border"
             android:letterSpacing="0.3"
             android:text="SIGN UP"
-            android:textColor="#ffffff"/>
+            android:textColor="#ffffff"
+            android:onClick="onClickOpenSignUpActivity"
+            />
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"
