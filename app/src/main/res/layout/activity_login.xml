@@ -27,7 +27,8 @@
             android:layout_gravity="center"
             android:background="#333333"
             android:padding="16dp"
-            android:hint="Username"
+            android:id="@+id/editTextEmail"
+            android:hint="Email"
             android:textColor="#ffffff"/>
 
         <EditText
@@ -38,6 +39,7 @@
             android:background="#333333"
             android:padding="16dp"
             android:inputType="textPassword"
+            android:id="@+id/editTextPassword"
             android:hint="Password"
             android:textColor="#ffffff"/>
 
@@ -52,7 +54,7 @@
             android:background="@drawable/green_button"
             android:letterSpacing="0.2"
             android:text="LOG IN"
-            android:onClick="onClickOpenDashboardActivity"
+            android:id="@+id/buttonLogin"
             android:textColor="#ffffff"/>
         <TextView
             android:layout_width="match_parent"
@@ -67,6 +69,12 @@
             android:textColor="#ffffff"/>
     </LinearLayout>
 
-
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
 
 </LinearLayout>

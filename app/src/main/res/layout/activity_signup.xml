@@ -43,6 +43,7 @@
                 android:layout_weight="1"
                 android:background="#333333"
                 android:hint="First Name"
+                android:id="@+id/editTextFName"
                 android:padding="16dp"
                 android:textColor="#ffffff" />
 
@@ -54,6 +55,7 @@
                 android:layout_weight="1"
                 android:background="#333333"
                 android:hint="Last Name"
+                android:id="@+id/editTextLName"
                 android:padding="16dp"
                 android:textColor="#ffffff" />
 
@@ -67,6 +69,7 @@
             android:layout_marginTop="16dp"
             android:background="#333333"
             android:hint="Email"
+            android:id="@+id/editTextEmail"
             android:padding="16dp"
             android:textColor="#ffffff" />
 
@@ -77,7 +80,7 @@
             android:layout_marginTop="16dp"
             android:orientation="horizontal">
 
-            <EditText
+            <Spinner
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="32dp"
@@ -86,9 +89,11 @@
                 android:background="#333333"
                 android:hint="Department"
                 android:padding="16dp"
-                android:textColor="#ffffff" />
+                android:textColor="#ffffff"
+                android:id="@+id/spinnerDepartment"
+                 />
 
-            <EditText
+            <Spinner
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="8dp"
@@ -97,7 +102,10 @@
                 android:background="#333333"
                 android:hint="Level"
                 android:padding="16dp"
-                android:textColor="#ffffff" />
+                android:textColor="#ffffff"
+                android:id="@+id/spinnerLevel"
+                />
+
         </LinearLayout>
 
         <EditText
@@ -109,6 +117,7 @@
             android:layout_marginBottom="16dp"
             android:background="#333333"
             android:hint="Matric Number"
+            android:id="@+id/editTextMatricNumber"
             android:padding="16dp"
             android:textColor="#ffffff" />
 
@@ -121,6 +130,7 @@
             android:background="#333333"
             android:inputType="textPassword"
             android:hint="Password"
+            android:id="@+id/editTextPassword"
             android:padding="16dp"
             android:textColor="#ffffff" />
 
@@ -135,9 +145,17 @@
             android:background="@drawable/green_button"
             android:letterSpacing="0.2"
             android:text="SIGNUP"
+            android:id="@+id/buttonRegister"
             android:textColor="#ffffff"/>
 
     </LinearLayout>
 
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
 
 </LinearLayout>
