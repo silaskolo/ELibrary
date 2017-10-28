@@ -15,7 +15,7 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:paddingTop="16dp"
-        android:text="DASHBOARD"
+        android:text="BOOK"
         android:textColor="#ffffff"
         android:textSize="16sp" />
 
@@ -29,12 +29,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/tv_error_message_display"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
                 android:layout_weight="0"
+                android:padding="16dp"
                 android:text="@string/error_message"
                 android:textSize="20sp"
                 android:visibility="gone" />
@@ -43,51 +44,87 @@
                 android:id="@+id/pb_loading_indicator"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
-                android:layout_weight="0"
                 android:layout_gravity="center"
+                android:layout_weight="0"
                 android:visibility="gone" />
-            <TextView
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_weight="0"
-                android:gravity="center"
-                android:text="Recommended Books"
-                android:textColor="#ffffff"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:orientation="horizontal">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerview_recommended"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_weight="0" />
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
 
-            <TextView
+                    <ImageView
+                        android:id="@+id/iv_book_image"
+                        android:layout_width="100dp"
+                        android:layout_height="150dp"
+                        android:layout_centerInParent="true"
+                        android:layout_margin="8dp"
+                        android:gravity="center_vertical"
+                        android:src="@drawable/placeholder" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:layout_marginTop="24dp"
-                android:layout_weight="0"
-                android:gravity="center"
-                android:text="New Release"
-                android:textColor="#ffffff"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:orientation="vertical">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerview_new"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_weight="0" />
+                <TextView
+                    android:id="@+id/tv_book_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_weight="0"
+                    android:padding="16dp"
+                    android:text=""
+                    android:textColor="#ffffff"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/tv_book_author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_weight="0"
+                    android:padding="16dp"
+                    android:text=""
+                    android:textColor="#ffffff"
+
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/tv_book_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_weight="0"
+                    android:padding="16dp"
+                    android:text=""
+                    android:textColor="#ffffff"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/buttonLogin"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/green_button"
+                android:letterSpacing="0.2"
+                android:text="View Book"
+                android:textColor="#ffffff" />
         </LinearLayout>
     </ScrollView>
-
 
 
     <View
