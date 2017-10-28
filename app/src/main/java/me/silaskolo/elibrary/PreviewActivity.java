@@ -1,8 +1,13 @@
 package me.silaskolo.elibrary;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -39,13 +44,19 @@ public class PreviewActivity extends AppCompatActivity{
     private TextView mBookAuthor;
     private TextView mBookCategory;
     private ImageView mBookCover;
-    private View mBookFile;
+    private String bookFileName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preview);
 
+        ActivityCompat.requestPermissions(PreviewActivity.this,
+                new String[] {
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                },
+                100);
 
         /* This TextView is used to display errors and will be hidden if there are no errors */
         mErrorMessageDisplay = (TextView) findViewById(R.id.tv_error_message_display);
@@ -95,7 +106,6 @@ public class PreviewActivity extends AppCompatActivity{
         mBookAuthor = (TextView) findViewById(R.id.tv_book_author);
         mBookCategory = (TextView) findViewById(R.id.tv_book_category);
         mBookCover = (ImageView) findViewById(R.id.iv_book_image);
-        mBookFile = (TextView) findViewById(R.id.tv_error_message_display);
 
         String bookCoverUrl = URLs.BOOK_PATH + bookCover;
 
@@ -103,6 +113,7 @@ public class PreviewActivity extends AppCompatActivity{
         mBookAuthor.setText(bookAuthor);
         mBookCategory.setText(bookCategory);
         new DownloadImageTask(mBookCover).execute(bookCoverUrl);
+        bookFileName = bookFile;
 
     }
 
@@ -226,8 +237,28 @@ public class PreviewActivity extends AppCompatActivity{
     }
 
     public void onClickViewBookActivity(View v) {
-        Intent libraryActivityIntent = new Intent(PreviewActivity.this,FileActivity.class);
-        startActivity(libraryActivityIntent);
+        Context context = this;
+        Class destinationClass = FileActivity.class;
+        Intent intentToStartDetailActivity = new Intent(context, destinationClass);
+        intentToStartDetailActivity.putExtra(Intent.EXTRA_TEXT, bookFileName);
+        startActivity(intentToStartDetailActivity);
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 100:
+                if (grantResults.length > 0
+                        || grantResults[0] == PackageManager.PERMISSION_GRANTED
+                        || grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                    /* User checks permission. */
+
+                } else {
+                    Toast.makeText(PreviewActivity.this, "Permission is denied.", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                //return; // delete.
+        }
+    }
 }
