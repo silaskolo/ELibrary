@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.pdfrendererbasic;
+package me.silaskolo.elibrary;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -36,9 +36,9 @@ import java.io.InputStream;
 
 /**
  * This fragment has a big {@ImageView} that shows PDF pages, and 2
- * {@link android.widget.Button}s to move between pages. We use a
- * {@link android.graphics.pdf.PdfRenderer} to render PDF pages as
- * {@link android.graphics.Bitmap}s.
+ * {@link Button}s to move between pages. We use a
+ * {@link PdfRenderer} to render PDF pages as
+ * {@link Bitmap}s.
  */
 public class PdfRendererBasicFragment extends Fragment implements View.OnClickListener {
 
@@ -58,7 +58,7 @@ public class PdfRendererBasicFragment extends Fragment implements View.OnClickLi
     private ParcelFileDescriptor mFileDescriptor;
 
     /**
-     * {@link android.graphics.pdf.PdfRenderer} to render the PDF.
+     * {@link PdfRenderer} to render the PDF.
      */
     private PdfRenderer mPdfRenderer;
 
@@ -68,17 +68,17 @@ public class PdfRendererBasicFragment extends Fragment implements View.OnClickLi
     private PdfRenderer.Page mCurrentPage;
 
     /**
-     * {@link android.widget.ImageView} that shows a PDF page as a {@link android.graphics.Bitmap}
+     * {@link ImageView} that shows a PDF page as a {@link Bitmap}
      */
     private ImageView mImageView;
 
     /**
-     * {@link android.widget.Button} to move to the previous page.
+     * {@link Button} to move to the previous page.
      */
     private Button mButtonPrevious;
 
     /**
-     * {@link android.widget.Button} to move to the next page.
+     * {@link Button} to move to the next page.
      */
     private Button mButtonNext;
 
@@ -93,7 +93,7 @@ public class PdfRendererBasicFragment extends Fragment implements View.OnClickLi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_pdf_renderer_basic, container, false);
+        return inflater.inflate(R.layout.pdf_renderer_basic, container, false);
     }
 
     @Override
@@ -145,11 +145,12 @@ public class PdfRendererBasicFragment extends Fragment implements View.OnClickLi
     }
 
     /**
-     * Sets up a {@link android.graphics.pdf.PdfRenderer} and related resources.
+     * Sets up a {@link PdfRenderer} and related resources.
      */
     private void openRenderer(Context context) throws IOException {
         // In this sample, we read a PDF from the assets directory.
         File file = new File(context.getCacheDir(), FILENAME);
+
         if (!file.exists()) {
             // Since PdfRenderer cannot handle the compressed asset file directly, we copy it into
             // the cache directory.
@@ -171,9 +172,9 @@ public class PdfRendererBasicFragment extends Fragment implements View.OnClickLi
     }
 
     /**
-     * Closes the {@link android.graphics.pdf.PdfRenderer} and related resources.
+     * Closes the {@link PdfRenderer} and related resources.
      *
-     * @throws java.io.IOException When the PDF file cannot be closed.
+     * @throws IOException When the PDF file cannot be closed.
      */
     private void closeRenderer() throws IOException {
         if (null != mCurrentPage) {

@@ -225,4 +225,9 @@ public class PreviewActivity extends AppCompatActivity{
         startActivity(libraryActivityIntent);
     }
 
+    public void onClickViewBookActivity(View v) {
+        Intent libraryActivityIntent = new Intent(PreviewActivity.this,FileActivity.class);
+        startActivity(libraryActivityIntent);
+    }
+
 }
