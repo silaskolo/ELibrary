@@ -4,9 +4,9 @@
 
     <!-- adding internet permission -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -25,13 +25,13 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".ForgotActivity" />
-        <activity android:name=".DashboardActivity" >
-        </activity>
+        <activity android:name=".DashboardActivity" />
         <activity android:name=".BrowseActivity" />
+        <activity android:name=".BrowseBooksActivity" />
         <activity android:name=".PreviewActivity" />
         <activity android:name=".FileActivity" />
         <activity android:name=".SearchActivity" />
-        <activity android:name=".LibraryActivity"></activity>
+        <activity android:name=".LibraryActivity" />
     </application>
 
 </manifest>
