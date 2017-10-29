@@ -3,11 +3,10 @@ package me.silaskolo.elibrary;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -19,30 +18,48 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-public class BrowseActivity extends AppCompatActivity implements CategoryAdapter.CategoryAdapterOnClickHandler{
+
+public class BrowseBooksActivity extends AppCompatActivity implements BookAdapter.BookAdapterOnClickHandler {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private RecyclerView mRecyclerView;
-    private CategoryAdapter mCategoryAdapter;
+    private BookAdapter mBookAdapter;
+
+    private String[] category;
+    private String categoryUrl;
+
+    private TextView mCategoryName;
+
 
     private TextView mErrorMessageDisplay;
 
     private ProgressBar mLoadingIndicator;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_browse);
+        setContentView(R.layout.activity_browse_books);
 
-                   /*
+                /*
          * Using findViewById, we get a reference to our RecyclerView from xml. This allows us to
          * do things like set the adapter of the RecyclerView and toggle the visibility.
          */
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_category);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_browse_books);
 
         /* This TextView is used to display errors and will be hidden if there are no errors */
         mErrorMessageDisplay = (TextView) findViewById(R.id.tv_error_message_display);
+
+        mCategoryName = (TextView) findViewById(R.id.tv_category_name);
+
+        Intent intentThatStartedThisActivity = getIntent();
+
+        if (intentThatStartedThisActivity != null) {
+            if (intentThatStartedThisActivity.hasExtra(Intent.EXTRA_TEXT)) {
+                category = intentThatStartedThisActivity.getStringArrayExtra(Intent.EXTRA_TEXT);
+                categoryUrl = URLs.URL_CATEGORY_BOOKS + category[0];
+                mCategoryName.setText(category[1]);
+            }
+        }
 
         /*
          * LinearLayoutManager can support HORIZONTAL or VERTICAL orientations. The reverse layout
@@ -50,7 +67,7 @@ public class BrowseActivity extends AppCompatActivity implements CategoryAdapter
          * languages.
          */
         LinearLayoutManager layoutManager
-                = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 
         mRecyclerView.setLayoutManager(layoutManager);
 
@@ -60,24 +77,32 @@ public class BrowseActivity extends AppCompatActivity implements CategoryAdapter
          */
         mRecyclerView.setHasFixedSize(true);
 
-        mCategoryAdapter = new CategoryAdapter(this);
+        mBookAdapter = new BookAdapter(this);
 
         /* Setting the adapter attaches it to the RecyclerView in our layout. */
-        mRecyclerView.setAdapter(mCategoryAdapter);
+        mRecyclerView.setAdapter(mBookAdapter);
 
+        /*
+         * The ProgressBar that will indicate to the user that we are loading data. It will be
+         * hidden when no data is loading.
+         *
+         * Please note: This so called "ProgressBar" isn't a bar by default. It is more of a
+         * circle. We didn't make the rules (or the names of Views), we just follow them.
+         */
         mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading_indicator);
 
-        loadCategoryData();
+        /* Once all of our views are setup, we can load the weather data. */
+        loadBookData();
     }
-
     /**
      * This method will get the user's preferred location for weather, and then tell some
      * background method to get the weather data in the background.
      */
-    private void loadCategoryData() {
+    private void loadBookData() {
         showBookDataView();
 
-        new FetchCategoryTask().execute();
+        new FetchBookTask().execute();
+        new FetchBookTask().execute();
     }
 
     private void showBookDataView() {
@@ -90,14 +115,12 @@ public class BrowseActivity extends AppCompatActivity implements CategoryAdapter
     private void showErrorMessage() {
         /* First, hide the currently visible data */
         mRecyclerView.setVisibility(View.INVISIBLE);
-
         /* Then, show the error */
         mErrorMessageDisplay.setVisibility(View.VISIBLE);
     }
 
-    public class FetchCategoryTask extends AsyncTask<Void, Void, String> {
+    public class FetchBookTask extends AsyncTask<Void, Void, String> {
 
-        final String CATEGORY_URL = URLs.URL_CATEGORY_ALL;
 
         @Override
         protected void onPreExecute() {
@@ -117,7 +140,7 @@ public class BrowseActivity extends AppCompatActivity implements CategoryAdapter
                 HashMap<String, String> params = new HashMap<>();
 
                 //returing the response
-                return requestHandler.sendPostRequest(CATEGORY_URL, params);
+                return requestHandler.sendPostRequest(categoryUrl, params);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -126,36 +149,32 @@ public class BrowseActivity extends AppCompatActivity implements CategoryAdapter
         }
 
         @Override
-        protected void onPostExecute(String categoryData) {
+        protected void onPostExecute(String bookData) {
 
-            String[][] parsedCategoryData = null;
+            String[][] parsedBookData = null;
 
             mLoadingIndicator.setVisibility(View.INVISIBLE);
 
             try {
                 //converting response to json object
-                JSONObject obj = new JSONObject(categoryData);
+                JSONObject obj = new JSONObject(bookData);
                 //if no error in response
                 if (!obj.getBoolean("error")) {
 
-                    Log.d(TAG,obj.toString());
-
                     //getting the user from the response
-                    JSONArray booksJson = obj.getJSONArray("category");
+                    JSONArray booksJson = obj.getJSONArray("books");
 
-
-                    parsedCategoryData = new String[booksJson.length()][2];
+                    parsedBookData = new String[booksJson.length()][2];
 
                     for (int i = 0; i < booksJson.length(); i++){
 
                         JSONObject currentBook = booksJson.getJSONObject(i);
-                        parsedCategoryData[i][0] = currentBook.getString("categoryID");
-                        parsedCategoryData[i][1] = currentBook.getString("categoryName");
+                        parsedBookData[i][0] = currentBook.getString("bookID");
+                        parsedBookData[i][1] = currentBook.getString("bookCover");
 
                     }
 
-                    Log.d(TAG,parsedCategoryData.toString());
-                    mCategoryAdapter.setCategoryData(parsedCategoryData);
+                    mBookAdapter.setBookData(parsedBookData);
 
                     //starting the profile activity
                     // finish();
@@ -169,32 +188,35 @@ public class BrowseActivity extends AppCompatActivity implements CategoryAdapter
 
         }
     }
+
+
+
     public void onClickOpenDashboardActivity(View v) {
-        Intent dashboardActivityIntent = new Intent(BrowseActivity.this,DashboardActivity.class);
+        Intent dashboardActivityIntent = new Intent(BrowseBooksActivity.this,DashboardActivity.class);
         startActivity(dashboardActivityIntent);
     }
 
     public void onClickOpenBrowseActivity(View v) {
-        Intent browseActivityIntent = new Intent(BrowseActivity.this,BrowseActivity.class);
+        Intent browseActivityIntent = new Intent(BrowseBooksActivity.this,BrowseActivity.class);
         startActivity(browseActivityIntent);
     }
 
     public void onClickOpenSearchActivity(View v) {
-        Intent searchActivityIntent = new Intent(BrowseActivity.this,SearchActivity.class);
+        Intent searchActivityIntent = new Intent(BrowseBooksActivity.this,SearchActivity.class);
         startActivity(searchActivityIntent);
     }
 
     public void onClickOpenLibraryActivity(View v) {
-        Intent libraryActivityIntent = new Intent(BrowseActivity.this,LibraryActivity.class);
+        Intent libraryActivityIntent = new Intent(BrowseBooksActivity.this,LibraryActivity.class);
         startActivity(libraryActivityIntent);
     }
 
     @Override
-    public void onClick(String[] category) {
+    public void onClick(String bookID) {
         Context context = this;
-        Class destinationClass = BrowseBooksActivity.class;
+        Class destinationClass = PreviewActivity.class;
         Intent intentToStartDetailActivity = new Intent(context, destinationClass);
-        intentToStartDetailActivity.putExtra(Intent.EXTRA_TEXT, category);
+        intentToStartDetailActivity.putExtra(Intent.EXTRA_TEXT, bookID);
         startActivity(intentToStartDetailActivity);
     }
 }
