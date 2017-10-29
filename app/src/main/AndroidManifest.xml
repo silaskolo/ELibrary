@@ -31,6 +31,7 @@
         <activity android:name=".PreviewActivity" />
         <activity android:name=".FileActivity" />
         <activity android:name=".SearchActivity" />
+        <activity android:name=".SearchResultsActivity" />
         <activity android:name=".LibraryActivity" />
     </application>
 

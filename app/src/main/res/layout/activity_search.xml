@@ -33,7 +33,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:background="#333333"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="48dp"
                 android:padding="16dp"
                 android:id="@+id/editTextSearch"
                 android:hint="Search"
@@ -64,6 +64,22 @@
                 android:text="Search"
                 android:id="@+id/buttonSearch"
                 android:textColor="#ffffff"/>
+            <TextView
+                android:id="@+id/tv_error_message_display"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:layout_weight="0"
+                android:text="@string/error_message"
+                android:textSize="20sp"
+                android:visibility="gone" />
+            <ProgressBar
+                android:visibility="gone"
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true" />
         </LinearLayout>
     </ScrollView>
 

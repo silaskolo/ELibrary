@@ -30,6 +30,26 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_weight="0"
+                android:gravity="center"
+                android:text=""
+                android:id="@+id/tv_category_name"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview_browse_books"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0" />
+            <TextView
                 android:id="@+id/tv_error_message_display"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -46,26 +66,6 @@
                 android:layout_weight="0"
                 android:layout_gravity="center"
                 android:visibility="gone" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_weight="0"
-                android:gravity="center"
-                android:text=""
-                android:id="@+id/tv_category_name"
-                android:textColor="#ffffff"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerview_browse_books"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_weight="0" />
         </LinearLayout>
     </ScrollView>
 

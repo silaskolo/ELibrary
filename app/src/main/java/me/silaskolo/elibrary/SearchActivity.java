@@ -1,5 +1,6 @@
 package me.silaskolo.elibrary;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,6 +27,7 @@ public class SearchActivity extends AppCompatActivity {
     private static final String TAG = "elibrary";
     EditText editTextSearch;
     Spinner spinnerGroup;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +57,7 @@ public class SearchActivity extends AppCompatActivity {
         //first we will do the validations
 
         if (TextUtils.isEmpty(searchText)) {
-            editTextSearch.setError("Enter a First Name");
+            editTextSearch.setError("Enter a Search Parameter");
             editTextSearch.requestFocus();
             return;
         }
@@ -76,22 +79,24 @@ public class SearchActivity extends AppCompatActivity {
 
                 String mUrl;
 
-                switch (searchGroup){
+                switch (searchGroup.toLowerCase()) {
                     case "author":
                         mUrl = URLs.URL_AUTHOR_SEARCH;
                         break;
                     case "book":
-                    default:
                         mUrl = URLs.URL_BOOK_SEARCH;
                         break;
                     case "category":
                         mUrl = URLs.URL_CATEGORY_SEARCH;
                         break;
+                    default:
+                        mUrl = "";
+                        break;
                 }
 
                 try {
                     mUrl += URLEncoder.encode(searchText, "UTF-8");
-                }catch (UnsupportedEncodingException e){
+                } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
 
@@ -110,8 +115,10 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             protected void onPostExecute(String s) {
+
+                String[][] parsedBookData = null;
                 super.onPostExecute(s);
-                Log.d("myTag", s);
+
                 //hiding the progressbar after completion
                 progressBar.setVisibility(View.GONE);
 
@@ -123,11 +130,29 @@ public class SearchActivity extends AppCompatActivity {
                     if (!obj.getBoolean("error")) {
                         Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
 
-                        Log.d(TAG,obj.toString());
+                        //getting the user from the response
+                        JSONArray booksJson = obj.getJSONArray("books");
+                        parsedBookData = new String[booksJson.length()][2];
 
+                        for (int i = 0; i < booksJson.length(); i++) {
+
+                            JSONObject currentBook = booksJson.getJSONObject(i);
+                            parsedBookData[i][0] = currentBook.getString("bookID");
+                            parsedBookData[i][1] = currentBook.getString("bookCover");
+
+                        }
+
+
+                        Context context = SearchActivity.this;
+                        Class destinationClass = SearchResultsActivity.class;
+                        Intent intentToStartDetailActivity = new Intent(context, destinationClass);
+
+                        Bundle booksBundle = new Bundle();
+                        booksBundle.putSerializable("list", parsedBookData);
+                        intentToStartDetailActivity.putExtra(Intent.EXTRA_TEXT, booksBundle);
+                        startActivity(intentToStartDetailActivity);
                         //starting the profile activity
-                        finish();
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//                        finish();
                     } else {
                         Toast.makeText(getApplicationContext(), "Some error occurred", Toast.LENGTH_SHORT).show();
                     }
@@ -143,22 +168,22 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void onClickOpenDashboardActivity(View v) {
-        Intent dashboardActivityIntent = new Intent(SearchActivity.this,DashboardActivity.class);
+        Intent dashboardActivityIntent = new Intent(SearchActivity.this, DashboardActivity.class);
         startActivity(dashboardActivityIntent);
     }
 
     public void onClickOpenBrowseActivity(View v) {
-        Intent browseActivityIntent = new Intent(SearchActivity.this,BrowseActivity.class);
+        Intent browseActivityIntent = new Intent(SearchActivity.this, BrowseActivity.class);
         startActivity(browseActivityIntent);
     }
 
     public void onClickOpenSearchActivity(View v) {
-        Intent searchActivityIntent = new Intent(SearchActivity.this,SearchActivity.class);
+        Intent searchActivityIntent = new Intent(SearchActivity.this, SearchActivity.class);
         startActivity(searchActivityIntent);
     }
 
     public void onClickOpenLibraryActivity(View v) {
-        Intent libraryActivityIntent = new Intent(SearchActivity.this,LibraryActivity.class);
+        Intent libraryActivityIntent = new Intent(SearchActivity.this, LibraryActivity.class);
         startActivity(libraryActivityIntent);
     }
 }
