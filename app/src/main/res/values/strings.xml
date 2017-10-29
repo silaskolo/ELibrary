@@ -12,7 +12,12 @@
         <item>4</item>
         <item>5</item>
         <item>6</item>
+    </string-array>
 
+    <string-array name="group_array">
+        <item>Book</item>
+        <item>Category</item>
+        <item>Author</item>
     </string-array>
 
     <string-array name="level_array">

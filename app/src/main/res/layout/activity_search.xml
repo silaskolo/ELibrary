@@ -20,7 +20,52 @@
         android:background="#121315"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"></ScrollView>
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:background="#333333"
+                android:layout_marginTop="16dp"
+                android:padding="16dp"
+                android:id="@+id/editTextSearch"
+                android:hint="Search"
+                android:textColor="#ffffff"/>
+
+            <Spinner
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:background="#333333"
+                android:hint="Group"
+                android:padding="16dp"
+                android:layout_marginTop="16dp"
+                android:textColor="#ffffff"
+                android:id="@+id/spinnerGroup"
+                />
+
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/green_button"
+                android:letterSpacing="0.2"
+                android:text="Search"
+                android:id="@+id/buttonSearch"
+                android:textColor="#ffffff"/>
+        </LinearLayout>
+    </ScrollView>
 
     <View
         android:layout_width="fill_parent"
