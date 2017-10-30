@@ -111,8 +111,6 @@ public class ProfileActivity extends AppCompatActivity {
 
                     //if no error in response
                     if (!obj.getBoolean("error")) {
-                        Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
-
                         //getting the user from the response
                         JSONObject userJson = obj.getJSONObject("user");
 
@@ -125,7 +123,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
                     } else {
-                        Toast.makeText(getApplicationContext(), "Invalid email or password", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Unable to Retrieve User", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
