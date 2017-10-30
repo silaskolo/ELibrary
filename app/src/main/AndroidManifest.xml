@@ -33,6 +33,9 @@
         <activity android:name=".SearchActivity" />
         <activity android:name=".SearchResultsActivity" />
         <activity android:name=".LibraryActivity" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".BooksActivity" />
+
     </application>
 
 </manifest>

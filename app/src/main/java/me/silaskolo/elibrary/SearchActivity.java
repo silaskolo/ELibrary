@@ -150,6 +150,7 @@ public class SearchActivity extends AppCompatActivity {
                         Bundle booksBundle = new Bundle();
                         booksBundle.putSerializable("list", parsedBookData);
                         intentToStartDetailActivity.putExtra(Intent.EXTRA_TEXT, booksBundle);
+                        intentToStartDetailActivity.putExtra("searchText", searchText);
                         startActivity(intentToStartDetailActivity);
                         //starting the profile activity
 //                        finish();

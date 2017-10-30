@@ -1,5 +1,6 @@
 package me.silaskolo.elibrary;
 
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -19,18 +20,13 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-
-public class BrowseBooksActivity extends AppCompatActivity implements BookAdapter.BookAdapterOnClickHandler {
+public class BooksActivity extends AppCompatActivity implements BookAdapter.BookAdapterOnClickHandler {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private RecyclerView mRecyclerView;
     private BookAdapter mBookAdapter;
 
-    private String[] category;
-    private String categoryUrl;
-
-    private TextView mCategoryName;
 
 
     private TextView mErrorMessageDisplay;
@@ -39,28 +35,16 @@ public class BrowseBooksActivity extends AppCompatActivity implements BookAdapte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_browse_books);
+        setContentView(R.layout.activity_books);
 
                 /*
          * Using findViewById, we get a reference to our RecyclerView from xml. This allows us to
          * do things like set the adapter of the RecyclerView and toggle the visibility.
          */
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_browse_books);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_personal_books);
 
         /* This TextView is used to display errors and will be hidden if there are no errors */
         mErrorMessageDisplay = (TextView) findViewById(R.id.tv_error_message_display);
-
-        mCategoryName = (TextView) findViewById(R.id.tv_category_name);
-
-        Intent intentThatStartedThisActivity = getIntent();
-
-        if (intentThatStartedThisActivity != null) {
-            if (intentThatStartedThisActivity.hasExtra(Intent.EXTRA_TEXT)) {
-                category = intentThatStartedThisActivity.getStringArrayExtra(Intent.EXTRA_TEXT);
-                categoryUrl = URLs.URL_CATEGORY_BOOKS + category[0];
-                mCategoryName.setText(category[1]);
-            }
-        }
 
         /*
          * LinearLayoutManager can support HORIZONTAL or VERTICAL orientations. The reverse layout
@@ -141,7 +125,7 @@ public class BrowseBooksActivity extends AppCompatActivity implements BookAdapte
                 HashMap<String, String> params = new HashMap<>();
 
                 //returing the response
-                return requestHandler.sendPostRequest(categoryUrl, params);
+                return requestHandler.sendPostRequest(URLs.URL_BOOK_PERSONAL, params);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -193,22 +177,22 @@ public class BrowseBooksActivity extends AppCompatActivity implements BookAdapte
 
 
     public void onClickOpenDashboardActivity(View v) {
-        Intent dashboardActivityIntent = new Intent(BrowseBooksActivity.this,DashboardActivity.class);
+        Intent dashboardActivityIntent = new Intent(BooksActivity.this,DashboardActivity.class);
         startActivity(dashboardActivityIntent);
     }
 
     public void onClickOpenBrowseActivity(View v) {
-        Intent browseActivityIntent = new Intent(BrowseBooksActivity.this,BrowseActivity.class);
+        Intent browseActivityIntent = new Intent(BooksActivity.this,BrowseActivity.class);
         startActivity(browseActivityIntent);
     }
 
     public void onClickOpenSearchActivity(View v) {
-        Intent searchActivityIntent = new Intent(BrowseBooksActivity.this,SearchActivity.class);
+        Intent searchActivityIntent = new Intent(BooksActivity.this,SearchActivity.class);
         startActivity(searchActivityIntent);
     }
 
     public void onClickOpenLibraryActivity(View v) {
-        Intent libraryActivityIntent = new Intent(BrowseBooksActivity.this,LibraryActivity.class);
+        Intent libraryActivityIntent = new Intent(BooksActivity.this,LibraryActivity.class);
         startActivity(libraryActivityIntent);
     }
 

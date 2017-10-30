@@ -12,11 +12,14 @@ public class URLs {
 
     public static final String URL_REGISTER = AUTH_URL + "register";
     public static final String URL_LOGIN= AUTH_URL + "login";
+    public static final String URL_UPDATE= AUTH_URL + "update";
+    public static final String URL_PROFILE= AUTH_URL + "profile";
 
     public static final String URL_BOOK_RECOMMENDED = BOOK_URL + "recommended";
     public static final String URL_BOOK_NEW = BOOK_URL + "new";
     public static final String URL_BOOK_BY_ID = BOOK_URL + "preview&bookID=" ;
     public static final String URL_BOOK_SEARCH = BOOK_URL + "search&searchText=" ;
+    public static final String URL_BOOK_PERSONAL = BOOK_URL + "personal" ;
 
     public static final String URL_CATEGORY_ALL = CATEGORY_URL + "all";
     public static final String URL_CATEGORY_BOOKS = CATEGORY_URL + "books&categoryID=";
