@@ -75,6 +75,14 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.buttonBack).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browseActivityIntent = new Intent(ProfileActivity.this, LibraryActivity.class);
+                startActivity(browseActivityIntent);
+            }
+        });
+
 
     }
 

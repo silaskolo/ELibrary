@@ -153,6 +153,19 @@
                 android:letterSpacing="0.2"
                 android:text="UPDATE"
                 android:textColor="#ffffff" />
+            <Button
+                android:id="@+id/buttonBack"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/red_button"
+                android:letterSpacing="0.2"
+                android:text="BACK"
+                android:textColor="#ffffff" />
         </LinearLayout>
     </LinearLayout>
 
