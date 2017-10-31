@@ -7,6 +7,7 @@ public class URLs {
     private static final String BOOK_URL = APP_ROOT + "service/books.php?action=";
     private static final String CATEGORY_URL = APP_ROOT + "service/category.php?action=";
     private static final String AUTHOR_URL = APP_ROOT + "service/author.php?action=";
+    private static final String PREFERENCE_URL = APP_ROOT + "service/preference.php?action=";
 
     public static final String BOOK_PATH = APP_ROOT + "uploads/books/";
 
@@ -26,5 +27,7 @@ public class URLs {
     public static final String URL_CATEGORY_SEARCH = CATEGORY_URL + "search&searchText=";
 
     public static final String URL_AUTHOR_SEARCH = AUTHOR_URL + "search&searchText=";
+
+    public static final String URL_PREFERENCE_BOOK = PREFERENCE_URL;
 
 }

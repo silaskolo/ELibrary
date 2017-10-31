@@ -14,8 +14,10 @@ import android.support.v7.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +48,12 @@ public class PreviewActivity extends AppCompatActivity{
     private ImageView mBookCover;
     private String bookFileName;
 
+    private Switch mbookPref;
+
+    User currentUser;
+
+    int user_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,8 +80,25 @@ public class PreviewActivity extends AppCompatActivity{
             }
         }
 
+        currentUser = SharedPrefManager.getInstance(getApplicationContext()).getUser();
+
+        user_id = currentUser.getId();
+
         /* Once all of our views are setup, we can load the weather data. */
         loadBookData();
+
+        mbookPref = (Switch) findViewById(R.id.book_pref);
+        mbookPref.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                String mAction;
+                if (isChecked) {
+                    mAction = "add";
+                }else{
+                    mAction = "remove";
+                }
+                (new manageBookPref(mAction)).execute();
+            }
+        });
     }
     /**
      * This method will get the user's preferred location for weather, and then tell some
@@ -213,6 +238,66 @@ public class PreviewActivity extends AppCompatActivity{
 
         protected void onPostExecute(Bitmap result) {
             bmImage.setImageBitmap(result);
+        }
+    }
+
+    public class manageBookPref extends AsyncTask<Void, Void, String> {
+
+        String action;
+
+        public manageBookPref(String action) {
+            this.action = action;
+        }
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mLoadingIndicator.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+
+
+            try {
+                //creating request handler object
+                RequestHandler requestHandler = new RequestHandler();
+
+                //creating request parameters
+                HashMap<String, String> params = new HashMap<>();
+                params.put("user_id", Integer.toString(user_id));
+                params.put("book_id", mBookID);
+                //returing the response
+                String mUrl = URLs.URL_PREFERENCE_BOOK + action;
+
+
+                return requestHandler.sendPostRequest(mUrl, params);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String prefData) {
+
+
+            mLoadingIndicator.setVisibility(View.INVISIBLE);
+
+            try {
+                //converting response to json object
+                JSONObject obj = new JSONObject(prefData);
+
+                //if no error in response
+                if (!obj.getBoolean("error")) {
+                    Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 

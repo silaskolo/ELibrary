@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -32,6 +33,12 @@ public class BooksActivity extends AppCompatActivity implements BookAdapter.Book
     private TextView mErrorMessageDisplay;
 
     private ProgressBar mLoadingIndicator;
+
+    User currentUser;
+
+    int user_id;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +83,10 @@ public class BooksActivity extends AppCompatActivity implements BookAdapter.Book
          */
         mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading_indicator);
 
+        currentUser = SharedPrefManager.getInstance(getApplicationContext()).getUser();
+
+        user_id = currentUser.getId();
+
         /* Once all of our views are setup, we can load the weather data. */
         loadBookData();
     }
@@ -86,7 +97,6 @@ public class BooksActivity extends AppCompatActivity implements BookAdapter.Book
     private void loadBookData() {
         showBookDataView();
 
-        new FetchBookTask().execute();
         new FetchBookTask().execute();
     }
 
@@ -123,6 +133,7 @@ public class BooksActivity extends AppCompatActivity implements BookAdapter.Book
 
                 //creating request parameters
                 HashMap<String, String> params = new HashMap<>();
+                params.put("user_id", Integer.toString(user_id));
 
                 //returing the response
                 return requestHandler.sendPostRequest(URLs.URL_BOOK_PERSONAL, params);
@@ -143,6 +154,7 @@ public class BooksActivity extends AppCompatActivity implements BookAdapter.Book
             try {
                 //converting response to json object
                 JSONObject obj = new JSONObject(bookData);
+                Log.d(TAG,obj.toString());
                 //if no error in response
                 if (!obj.getBoolean("error")) {
 

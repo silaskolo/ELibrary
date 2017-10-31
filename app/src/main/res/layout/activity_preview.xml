@@ -81,7 +81,7 @@
                     android:textSize="18sp"
                     android:layout_height="wrap_content" />
                 <Switch
-                    android:id="@+id/simpleSwitch"
+                    android:id="@+id/book_pref"
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"/>
